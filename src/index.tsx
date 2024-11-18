@@ -2,7 +2,6 @@ import express, {
   Request as ExpressRequest,
   Response as ExpressResponse,
 } from "express";
-import fetch from "node-fetch"; // node-fetch 가져오기
 import { createStaticHandler } from "react-router-dom/server";
 import routes from "./client/routes/routes";
 import createFetchRequest from "./server/request";
@@ -15,6 +14,7 @@ let handler = createStaticHandler(routes);
 
 app.get("*", async (req: ExpressRequest, res: ExpressResponse) => {
   const { url, init } = createFetchRequest(req, res); // Fetch 요청에 필요한 URL과 init 객체 가져오기
+  const fetch = (await import("node-fetch")).default;
   const fetchResponse = await fetch(url, init); // node-fetch를 사용하여 요청 보내기
 
   // fetchResponse를 StaticHandler.query에 전달
