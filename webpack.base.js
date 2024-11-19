@@ -1,6 +1,4 @@
-import { Configuration } from "webpack";
-
-const config: Configuration = {
+const config = {
   module: {
     rules: [
       {
@@ -25,4 +23,4 @@ const config: Configuration = {
   },
 };
 
-export default config;
+module.exports = config;
