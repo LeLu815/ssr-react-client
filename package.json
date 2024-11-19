@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "description": "Server side rendering project",
+  "type": "module",
   "scripts": {
     "dev:server": "nodemon --watch build --exec \"node build/bundle.js\"",
-    "dev:build-server": "webpack --config webpack.server.ts --watch",
-    "dev:build-client": "webpack --config webpack.client.ts --watch",
-    "dev": "npm-run-all --parallel dev:*"
+    "dev:build-server": "webpack --config webpack.server.ts",
+    "dev:build-client": "webpack --config webpack.client.ts",
+    "dev:build": "npm-run-all dev:build-server dev:build-client",
+    "dev:start": "node build/bundle.js",
+    "dev": "npm run dev:build && npm run dev:start"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.3.0",

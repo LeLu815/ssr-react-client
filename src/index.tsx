@@ -2,6 +2,7 @@ import express, {
   Request as ExpressRequest,
   Response as ExpressResponse,
 } from "express";
+import fetch from "node-fetch"; // ESM 방식으로 import
 import { renderToString } from "react-dom/server";
 import {
   createStaticHandler,
@@ -19,7 +20,8 @@ let handler = createStaticHandler(routes);
 
 app.get("*", async (req: ExpressRequest, res: ExpressResponse) => {
   const { url, init } = createFetchRequest(req, res); // Fetch 요청에 필요한 URL과 init 객체 가져오기
-  const fetch = (await import("node-fetch")).default;
+  // const fetch = (await import("node-fetch")).default;
+
   const fetchResponse = await fetch(url, init); // node-fetch를 사용하여 요청 보내기
 
   // fetchResponse를 StaticHandler.query에 전달
